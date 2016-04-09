@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" ng-app>
+
+<head>
+    <title>Chat Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <style>
+        body {
+            padding-top: 60px;
+        }
+    </style>
+    <script src="bundle.js"></script>
+    <script>
+        var aaa = require("asteroid");
+        
+        const Asteroid = aaa.createClass();
+
+        const asteroid = new Asteroid({
+            endpoint: "wss://umbali.org/websocket"
+        });
+
+        // Use real-time collections
+        asteroid.subscribe("currencies");
+
+        asteroid.ddp.on("added", ({
+            collection, id, fields
+        }) => {
+            console.log(`Element added to collection ${collection}`);
+            console.log(id);
+            console.log(fields);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container" ng-controller="ChatController">
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="pull-right">
+                    <a href="https://c9.io" class="brand">Cloud9 IDE</a>
+                </div>
+            </div>
+        </div>
+        <div class="page-header">
+            <h1>Posts Example</h1>
+        </div>
+        <div class="row">
+            <div class="#posts">
+            </div>
+        </div>
+    </div>
+    
+    <!--<script src="/asteroid/lib/base-mixinx/ddp.js"></script>-->
+    <!--<script src="/asteroid/lib/base-mixinx/subscriptions.js"></script>-->
+</body>
+
+</html>
